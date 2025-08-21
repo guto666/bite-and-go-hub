@@ -1,129 +1,174 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { MapPin, Phone, Clock, Mail, Instagram, Facebook, Twitter } from "lucide-react";
+import { Heart, Mail, Phone, MapPin, Shield, Award, Clock } from "lucide-react";
 
 const Footer = () => {
+  const features = [
+    {
+      icon: Shield,
+      title: "Segurança Total",
+      description: "Dados protegidos com criptografia avançada"
+    },
+    {
+      icon: Award,
+      title: "Certificado",
+      description: "Conforme normas de proteção de dados médicos"
+    },
+    {
+      icon: Clock,
+      title: "Suporte 24/7",
+      description: "Atendimento disponível quando você precisar"
+    }
+  ];
+
+  const links = {
+    produto: [
+      { name: "Agendamento Online", href: "#agendamento" },
+      { name: "Gestão de Pacientes", href: "#pacientes" },
+      { name: "Prontuários Digitais", href: "#prontuarios" },
+      { name: "Relatórios", href: "#relatorios" }
+    ],
+    empresa: [
+      { name: "Sobre Nós", href: "#" },
+      { name: "Blog", href: "#" },
+      { name: "Carreiras", href: "#" },
+      { name: "Contato", href: "#" }
+    ],
+    suporte: [
+      { name: "Central de Ajuda", href: "#" },
+      { name: "Documentação", href: "#" },
+      { name: "Status do Sistema", href: "#" },
+      { name: "Privacidade", href: "#" }
+    ]
+  };
+
   return (
-    <footer className="bg-secondary/20 border-t border-border">
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="space-y-6">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">B</span>
-              </div>
-              <span className="text-2xl font-bold text-foreground">BurgerFlow</span>
-            </div>
-            
-            <p className="text-muted-foreground">
-              A plataforma completa para hamburguerias modernas. Cardápio digital, 
-              personalização de lanches e delivery integrado.
-            </p>
-            
-            <div className="flex space-x-4">
-              <Button variant="ghost" size="icon">
-                <Instagram className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Facebook className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Twitter className="h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-
-          {/* Links rápidos */}
-          <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-foreground">Links Rápidos</h3>
-            <nav className="space-y-3">
-              <a href="#cardapio" className="block text-muted-foreground hover:text-primary transition-colors">
-                Cardápio
-              </a>
-              <a href="#montar" className="block text-muted-foreground hover:text-primary transition-colors">
-                Montar Lanche
-              </a>
-              <a href="#delivery" className="block text-muted-foreground hover:text-primary transition-colors">
-                Delivery
-              </a>
-              <a href="#sobre" className="block text-muted-foreground hover:text-primary transition-colors">
-                Sobre Nós
-              </a>
-            </nav>
-          </div>
-
-          {/* Contato */}
-          <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-foreground">Contato</h3>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <MapPin className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-muted-foreground">
-                  Rua das Hamburguerias, 123<br />
-                  Centro - SP
-                </span>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-muted-foreground">(11) 99999-9999</span>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-muted-foreground">contato@burgerflow.com</span>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <Clock className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-muted-foreground">
-                  Seg à Dom: 11h às 23h
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Newsletter */}
-          <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-foreground">Newsletter</h3>
-            <p className="text-muted-foreground">
-              Receba ofertas exclusivas e novidades diretamente no seu email.
-            </p>
-            
-            <div className="space-y-3">
-              <Input 
-                placeholder="Seu melhor email" 
-                type="email"
-              />
-              <Button variant="default" className="w-full">
-                Inscrever-se
-              </Button>
-            </div>
-            
-            <p className="text-xs text-muted-foreground">
-              Ao se inscrever, você concorda em receber emails promocionais. 
-              Cancele a qualquer momento.
-            </p>
+    <footer className="bg-card border-t border-border">
+      {/* Features Section */}
+      <div className="border-b border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid md:grid-cols-3 gap-8">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <div key={index} className="text-center">
+                  <div className="bg-primary/10 p-3 rounded-lg w-fit mx-auto mb-4">
+                    <Icon className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2">{feature.title}</h3>
+                  <p className="text-sm text-muted-foreground">{feature.description}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
+      </div>
 
-        {/* Bottom */}
-        <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-muted-foreground text-sm">
-            © 2024 BurgerFlow. Todos os direitos reservados.
-          </p>
-          
-          <div className="flex space-x-6 text-sm">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-              Política de Privacidade
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-              Termos de Uso
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-              Cookies
-            </a>
+      {/* Main Footer Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid lg:grid-cols-5 gap-8">
+          {/* Brand */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="bg-gradient-hero p-2 rounded-lg shadow-glow">
+                <Heart className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-foreground font-montserrat">DentalCare Pro</h3>
+                <p className="text-sm text-muted-foreground">Gestão Odontológica</p>
+              </div>
+            </div>
+            
+            <p className="text-muted-foreground mb-6 max-w-md">
+              A solução completa para modernizar seu consultório odontológico com agendamento online, 
+              gestão de pacientes e relatórios inteligentes.
+            </p>
+
+            {/* Contact Info */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <Phone className="h-4 w-4" />
+                <span className="text-sm">(11) 3000-1234</span>
+              </div>
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <Mail className="h-4 w-4" />
+                <span className="text-sm">contato@dentalcarepro.com</span>
+              </div>
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <MapPin className="h-4 w-4" />
+                <span className="text-sm">São Paulo, SP - Brasil</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Links */}
+          <div>
+            <h4 className="font-semibold text-foreground mb-4">Produto</h4>
+            <ul className="space-y-2">
+              {links.produto.map((link, index) => (
+                <li key={index}>
+                  <a 
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-foreground mb-4">Empresa</h4>
+            <ul className="space-y-2">
+              {links.empresa.map((link, index) => (
+                <li key={index}>
+                  <a 
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-foreground mb-4">Suporte</h4>
+            <ul className="space-y-2">
+              {links.suporte.map((link, index) => (
+                <li key={index}>
+                  <a 
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-sm text-muted-foreground">
+              © 2024 DentalCare Pro. Todos os direitos reservados.
+            </div>
+            
+            <div className="flex items-center gap-6">
+              <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Política de Privacidade
+              </a>
+              <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Termos de Uso
+              </a>
+              <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                LGPD
+              </a>
+            </div>
           </div>
         </div>
       </div>

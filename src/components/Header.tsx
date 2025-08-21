@@ -1,59 +1,101 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Menu, User } from "lucide-react";
+import { Menu, X, Calendar, Users, FileText, BarChart3, Heart } from "lucide-react";
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navigation = [
+    { name: "Agendamento", href: "#agendamento", icon: Calendar },
+    { name: "Pacientes", href: "#pacientes", icon: Users },
+    { name: "Prontuários", href: "#prontuarios", icon: FileText },
+    { name: "Relatórios", href: "#relatorios", icon: BarChart3 },
+  ];
+
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+    <header className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">B</span>
+          <div className="flex items-center gap-2">
+            <div className="bg-gradient-hero p-2 rounded-lg shadow-glow">
+              <Heart className="h-6 w-6 text-primary-foreground" />
             </div>
-            <span className="text-2xl font-bold text-foreground">BurgerFlow</span>
+            <div>
+              <h1 className="text-xl font-bold text-foreground font-montserrat">DentalCare Pro</h1>
+              <p className="text-xs text-muted-foreground">Gestão Odontológica</p>
+            </div>
           </div>
 
-          {/* Navigation - Desktop */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="#cardapio" className="text-foreground hover:text-primary transition-colors">
-              Cardápio
-            </a>
-            <a href="#montar" className="text-foreground hover:text-primary transition-colors">
-              Montar Lanche
-            </a>
-            <a href="#delivery" className="text-foreground hover:text-primary transition-colors">
-              Delivery
-            </a>
-            <a href="#sobre" className="text-foreground hover:text-primary transition-colors">
-              Sobre
-            </a>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-1">
+            {navigation.map((item) => {
+              const Icon = item.icon;
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="flex items-center gap-2 px-4 py-2 text-muted-foreground hover:text-primary transition-colors rounded-lg hover:bg-secondary/50"
+                >
+                  <Icon className="h-4 w-4" />
+                  {item.name}
+                </a>
+              );
+            })}
           </nav>
 
-          {/* Actions */}
-          <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                0
-              </span>
-            </Button>
-            
-            <Button variant="outline" size="sm" className="hidden md:flex">
-              <User className="h-4 w-4 mr-2" />
+          {/* CTA Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            <Button variant="outline" size="sm">
               Login
             </Button>
-
-            <Button variant="default" size="sm" className="hidden md:flex">
-              Fazer Pedido
-            </Button>
-
-            {/* Mobile menu */}
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <Menu className="h-5 w-5" />
+            <Button variant="hero" size="sm">
+              Agendar Consulta
             </Button>
           </div>
+
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <X className="h-6 w-6 text-foreground" />
+            ) : (
+              <Menu className="h-6 w-6 text-foreground" />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-border bg-background">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navigation.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="flex items-center gap-3 px-3 py-3 text-muted-foreground hover:text-primary transition-colors rounded-lg hover:bg-secondary/50"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Icon className="h-5 w-5" />
+                    {item.name}
+                  </a>
+                );
+              })}
+              <div className="flex flex-col gap-2 pt-4 border-t border-border">
+                <Button variant="outline" size="sm" className="w-full">
+                  Login
+                </Button>
+                <Button variant="hero" size="sm" className="w-full">
+                  Agendar Consulta
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
